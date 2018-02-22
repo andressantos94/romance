@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>...---Markov Chain---...</title>
+	</head>
+	<body>
+		<style type="text/css">
+			body{
+				background-color: #007acc;
+			}
+			#poem{
+				margin: 30px;
+				text-align: center;
+				text-shadow: 0.3px 0.3px yellow;
+			}
+			#welcome{
+				margin: 30px auto 50px 300px;
+				font-size: 55px;
+				color: red;
+				text-shadow: 2.5px 2.5px black;
+			}
+			#credits{
+				margin-top: 50px;
+				text-align: center;
+			}
+			td{
+				text-align: right;
+				font-size: 20px;
+			}
+			table{
+				margin: auto;
+			}
+			#lines,#words{
+				width: 25px;
+				height: 25px;
+			}
+			#start{
+				margin-left: 600px;
+				width: 200px;
+				height: 25px;
+				font-size: 18px; 
+			}
+
+		</style>
+		<div>
+		<h1 id='welcome'>A beautiful poem, from my heart...</h1>
+
+		<p id='chain'></p>
+		<table>
+				<tr>
+					<td><p>How many lines would you like in your poem?</p></td>
+					<td><input type="text" id="lines" value="5"></td>
+				</tr>
+				<tr>
+					<td><p>How many words per line would you like in your poem?</p></td>
+					<td><input type="text" id="words" value="5"></td>
+				</tr>
+				<tr>
+					<form>
+						<input type="button" id='start' value="Generate new poem!" onclick="helper()">	
+					</form>
+				</tr>
+		</table>
+				
+		
+
+		<h1 id='poem'></h1>
+		</div>
+
+		<div>
+			
+		<h3 id="credits"></h3>
+		</div>
+		<script type="text/javascript">
+
+			var strings = ["Hey Havana, ooh na-na (ay) Half of my heart is in Havana, ooh-na-na (ay, ay) He took me back to East Atlanta, na-na-na Oh, but my heart is in Havana (ay) There's somethin' 'bout his manners (uh huh) Havana, ooh na-na (uh) He didn't walk up with that how you doin'? (uh) (When he came in the room) He said there's a lot of girls I can do with (uh) (But I can't without you) I knew him forever in a minute (hey) (That summer night in June) And papa says he got malo in him (uh) He got me feelin' like Ooh-ooh-ooh, I knew it when I met him I loved him when I left him Got me feelin' like Ooh-ooh-ooh, and then I had to tell him I had to go, oh na-na-na-na-na Havana, ooh na-na (ay, ay) Half of my heart is in Havana, ooh-na-na (ay, ay) He took me back to East Atlanta, na-na-na (uh huh) Oh, but my heart is in Havana (ay) My heart is in Havana (ay) Havana, ooh na-na Just graduated, fresh on campus, mm Fresh out East Atlanta with no manners, damn Fresh out East Atlanta Bump on her bumper like a traffic jam Hey, I was quick to pay that girl like Uncle Sam (here you go, ay) Back it on me, shawty cravin' on me Get to diggin' on me (on me) She waited on me (then what?) Shawty cakin' on me, got the bacon on me (wait up) This is history in the makin' on me (on me) Point blank, close range, that be If it cost a million, that's me (that's me) I was gettin' mula, man they feel me","Despacito Quiero respirar tu cuello despacito Deja que te diga cosas al oido Para que te acuerdes si no estas conmigo Despacito Quiero desnudarte a besos despacito Firmo en las paredes de tu laberinto Y hacer de tu cuerpo todo un manuscrito sube, sube, sube Sube sube Quiero ver bailar tu pelo Quiero ser tu ritmo Que le ensenies a mi boca Tus lugares favoritos favoritos, favoritos baby Dejame sobrepasar tus zonas de peligro Hasta provocar tus gritos Y que olvides tu apellido Diridiri, dirididi Daddy DY Si te pido un beso ven damelo Yo se que estas pensandolo Llevo tiempo intentandolo Mami, esto es dando y dandolo Sabes que tu corazon conmigo te hace bom, bom Sabes que esa beba esta buscando de mi bom, bom Ven prueba de mi boca para ver como te sabe Quiero, quiero, quiero ver cuanto amor a ti te cabe Yo no tengo prisa, yo me quiero dar el viaje Empecemos lento, despues salvaje Pasito a pasito, suave suavecito Nos vamos pegando poquito a poquito Cuando tu me besas con esa destreza Veo que eres malicia con delicadeza Pasito a pasito, suave suavecito Nos vamos pegando, poquito a poquito Y es que esa belleza es un rompecabezas Pero pa montarlo aqui tengo la pieza","Something must've gone wrong in my brain Got your chemicals all in my veins Feeling all the highs, feel all the pain Let go of the wheel, it's the borderline Now I'm seeing red, not thinking straight Blurring all the lines, you intoxicate me Just like nicotine, rushin' me, touching me Suddenly, I'm a fiend and you're all I need All I need, yeah, you're all I need It's you, babe And I'm a sucker for the way that you move, babe And I could try to run, but it would be useless You're to blame Just one hit of you, I knew I'll never be the same It's you, babe And I'm a sucker for the way that you move, babe And I could try to run, but it would be useless You're to blame Just one hit of you, I knew I'll never ever, ever be the same I'll never be the same I'll never be the same I'll never be the same Sneaking in L.A. when the lights are low Off of one touch, I could overdose He said, Stop playing it safe Girl, I wanna see you lose control Just like nicotine, rushin' me, touching me Suddenly, I'm a friend and you're all I need All I need, yeah, you're all I need","Well, you almost had me fooled Told me that I was nothing without you Oh, but after everything you've done I can thank you for how strong I have become 'Cause you brought the flames and you put me through hell I had to learn how to fight for myself And we both know all the truth I could tell I'll just say this is I wish you farewell I hope you're somewhere prayin', prayin' I hope your soul is changin', changin' I hope you find your peace Falling on your knees, prayin' I'm proud of who I am No more monsters, I can breathe again And you said that I was done Well, you were wrong and now the best is yet to come 'Cause I can make it on my own, oh And I don't need you, I found a strength I've never known I'll bring thunder, I'll bring rain, oh When I'm finished, they won't even know your name You brought the flames and you put me through hell I had to learn how to fight for myself And we both know all the truth I could tell I'll just say this is I wish you farewell I hope you're somewhere prayin', prayin' I hope your soul is changin', changin' I hope you find your peace Falling on your knees, prayin' Ah sometimes, I pray for you at night, oh Someday, maybe you'll see the light Whoa oh oh oh, some say, in life, you're gonna get what you give But some things only God can forgive","Yo te miro, se me corta la respiracion Cuando tu me miras se me sube el corazon (me palpita lento el corazon) Y en silencio tu mirada dice mil palabras La noche en la que te suplico que no salga el sol (Bailando, bailando, bailando, bailando) Tu cuerpo y el mio llenando el vacio Subiendo y bajando (subiendo y bajando) (Bailando, bailando, bailando, bailando) Ese fuego por dentro me esta enloqueciendo Me va saturando Con tu fisica y tu quimica, tambien tu anatomia La cerveza y el tequila y tu boca con la mia Ya no puedo mas (ya no puedo mas) Ya no puedo mas (ya no puedo mas) Con esta melodia, tu color, tu fantasia Con tu filosofia mi cabeza esta vacia Y ya no puedo mas (ya no puedo mas) Ya no puedo mas (ya no puedo mas) Yo quiero estar contigo, vivir contigo Bailar contigo, tener contigo Una noche loca (una noche loca) Ay, besar tu boca (y besar tu boca) Yo quiero estar contigo, vivir contigo Bailar contigo, tener contigo una noche loca Con tremenda loca (Ooh, ooh, ooh, ooh) Tu me miras y me llevas a otra dimension (estoy en otra dimension) Tus latidos aceleran a mi corazon (Tus latidos aceleran a mi corazon) Que ironia del destino no poder tocarte Abrazarte y sentir la magia de tu olor (Bailando, bailando, bailando, bailando) Tu cuerpo y el mio llenando el vacio Subiendo y bajando (subiendo y bajando) (Bailando, bailando, bailando, bailando) Ese fuego por dentro me esta enloqueciendo Me va saturando"];
+
+			function parseText(str){
+				var tempStr = str.toLowerCase().split(' ');
+			  	return tempStr.map(function(word){
+			    	var newWord = word.split('');
+			    	return newWord.filter(function(letter){
+			      		return typeof letter!=='number' && letter!=='.' && letter!==',' && letter!=='!' && letter!=='(' && letter!==')'&& letter!=='"';
+			    	}).join('');
+			  	});
+			}
+
+			function generateWordPairs(arr){
+			  var finalObj = {};
+			  arr.forEach(function(word,index){
+			    if(!finalObj[word]&&!arr[index+1]){
+			      finalObj[word]=[];
+			    }else if(!finalObj[word]){
+			      finalObj[word]=[arr[index+1]];
+			    }else if(finalObj[word]&&arr[index+1]){
+			      finalObj[word].push(arr[index+1]);
+			    }
+			  });
+			  console.log(finalObj);
+			  return finalObj;
+			}
+
+			function writeLine(obj,numWords){
+			  var words = [];
+			  var finalLine = [];
+			  for(var word in obj){
+			    words.push(word);
+			  }
+			  
+			  while(finalLine.length<numWords){
+			    do{
+			     var index = Math.floor(Math.random()*words.length);
+			     var currentWord = words[index];
+			    }while(!currentWord||obj[currentWord].length===0);
+			    finalLine.push(currentWord);
+			    if(finalLine.length<numWords){
+				    do{
+				      var index2 = Math.floor(Math.random()*obj[currentWord].length);
+				    }while(!obj[currentWord][index2]);
+				    var nextWord = obj[currentWord][index2];
+				    finalLine.push(nextWord);
+				    // console.log(finalLine);
+				    currentWord = nextWord;
+				 }
+			  }
+			  finalLine[0]=finalLine[0][0].toUpperCase()+finalLine[0].slice(1);
+			  return finalLine.join(' ');
+			}
+
+			function generatePoem(wordCorpus,numLines,numWords){
+			  var arrPoem = parseText(wordCorpus);
+			  var markovChain = generateWordPairs(arrPoem);
+			  console.log(markovChain);
+			  var poem = '';
+			  var i=1;
+			  document.getElementById('poem').innerHTML ='';
+			  do{
+			  	if(i===1&&numLines>1){
+			  		var final = ',<br>';
+			  		var start = '"...'
+			  	}else if(numLines>1){
+			  		var final = ',<br>';
+			  		var start = '';
+			  	}else if(numLines===1){
+			  		var final = '..."';
+			  		var start = '';
+			  	}
+			    document.getElementById('poem').innerHTML += start + writeLine(markovChain,numWords)+ final;
+			    numLines--;
+			    i++;
+			  }while(numLines>0)
+			}
+
+			function helper(){
+				var lines = parseInt(document.getElementById("lines").value);
+				var words = parseInt(document.getElementById("words").value);
+				document.getElementById('credits').innerHTML='';
+				do{
+					var index = Math.floor(Math.random()*strings.length);	
+				}while(!strings[index]);
+				generatePoem(strings[index],lines,words);
+				if(index===0){
+					var song = 'Havana';
+					var singer = 'Camila Cabello'
+				}else if(index===1){
+					var song = 'Despacito';
+					var singer = 'Luis Fonsi & Daddy Yankee';
+				}else if(index===2){
+					var song = 'Never Be the Same';
+					var singer = 'Camila Cabello';
+				}else if(index===3){
+					var song = 'Praying';
+					var singer = 'Kesha';
+				}else if(index===4){
+					var song = 'Bailando';
+					var singer = 'Enrique Iglesias & Gente de Zona';
+				}
+			  document.getElementById('credits').innerHTML += "Original Lyrics from '"+song+"',<br>" +singer+"'s song,<br>but IMPROVED by Andres Santos.<br>Thank you! @2018";
+			}
+
+
+
+
+		</script>
+	</body>
+</html>
