@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>...---Markov Chain---...</title>
+		<title>...---Markov Chain by @Andres Santos 2018---...</title>
 	</head>
 	<body>
 		<style type="text/css">
@@ -14,18 +14,20 @@
 				text-shadow: 0.3px 0.3px yellow;
 			}
 			#welcome{
-				margin: 30px auto 50px 300px;
-				font-size: 55px;
+				margin: 30px auto auto 30px;
+				font-size: 50px;
 				color: red;
 				text-shadow: 2.5px 2.5px black;
 			}
 			#credits{
-				margin-top: 50px;
+				margin-top: 60px;
 				text-align: center;
 			}
 			td{
+				padding: 1px;
+				margin: 1px;
 				text-align: right;
-				font-size: 20px;
+				font-size: 25px;
 			}
 			table{
 				margin: auto;
@@ -33,17 +35,18 @@
 			#lines,#words{
 				width: 25px;
 				height: 25px;
+				text-align: right;
 			}
 			#start{
-				margin-left: 600px;
+				margin: 50px auto;
 				width: 200px;
-				height: 25px;
+				height: 30px;
 				font-size: 18px; 
 			}
 
 		</style>
 		<div>
-		<h1 id='welcome'>A beautiful poem, from my heart...</h1>
+		<h1 id='welcome'>...A beautiful poem, from the bottom of my heart...</h1>
 
 		<p id='chain'></p>
 		<table>
@@ -54,12 +57,7 @@
 				<tr>
 					<td><p>How many words per line would you like in your poem?</p></td>
 					<td><input type="text" id="words" value="5"></td>
-				</tr>
-				<tr>
-					<form>
-						<input type="button" id='start' value="Generate new poem!" onclick="helper()">	
-					</form>
-				</tr>
+					<td><input type="button" id="start" value="Generate new poem!" onclick="helper()"></td>
 		</table>
 				
 		
